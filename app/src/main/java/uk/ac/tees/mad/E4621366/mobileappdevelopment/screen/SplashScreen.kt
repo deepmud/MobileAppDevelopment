@@ -9,14 +9,27 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthViewModel
 
 @Composable
 fun SplashScreen(navController: NavController) {
-    LaunchedEffect(true) {
-        delay(2000)
-        navController.navigate("login")
+    val authVM: AuthViewModel = viewModel()
+
+    LaunchedEffect(Unit) {
+        delay(1500)
+
+        if (authVM.isLoggedIn()) {
+            navController.navigate("dashboard") {
+                popUpTo("splash") { inclusive = true }
+            }
+        } else {
+            navController.navigate("login") {
+                popUpTo("splash") { inclusive = true }
+            }
+        }
     }
 
     Box(

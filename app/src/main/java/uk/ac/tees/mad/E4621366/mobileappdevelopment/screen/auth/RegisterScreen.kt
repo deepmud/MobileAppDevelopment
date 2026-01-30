@@ -1,84 +1,95 @@
 package  uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.auth
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.runtime.Composable
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-
-import androidx.compose.material3.Text
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.unit.sp
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.component.FormField
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.model.RegisterRequest
+
+
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthResultState
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthViewModel
+
 
 @Composable
-fun RegisterScreen(navController: NavController) {
-
+fun RegisterScreen(
+    navController: NavController,
+    authVM: AuthViewModel = viewModel()
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var gender by remember { mutableStateOf("") }
-    var town by remember { mutableStateOf("") }
-    var city by remember { mutableStateOf("") }
-    var county by remember { mutableStateOf("") }
-    var postcode by remember { mutableStateOf("") }
-    var country by remember { mutableStateOf("") }
 
+    val authState by authVM.authState.collectAsState()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp)
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center
     ) {
 
-        Text("Register", fontSize = 24.sp)
+        Text("Register", style = MaterialTheme.typography.headlineMedium)
 
-        Spacer(Modifier.height(12.dp))
+        Spacer(Modifier.height(16.dp))
 
-        FormField("Email", email) { email = it }
-        FormField("Password", password, true) { password = it }
-        FormField("Gender", gender) { gender = it }
-        FormField("Town", town) { town = it }
-        FormField("City", city) { city = it }
-        FormField("County", county) { county = it }
-        FormField("Postcode", postcode) { postcode = it }
-        FormField("country", country) { country = it }
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
 
+        Spacer(Modifier.height(8.dp))
 
-        Spacer(Modifier.height(20.dp))
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            onClick = {
-
-                val request = RegisterRequest(
-                    email,
-                    password,
-                    gender,
-                    town,
-                    city,
-                    county,
-                    country,
-                    postcode,
-                )
-
-                // TODO: Send to API in Sprint 4
-                navController.navigate("login")
-            }
+            onClick = { authVM.registerWithEmail(email, password) }
         ) {
-            Text("Register")
+            Text("Create Account")
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        when (authState) {
+            is AuthResultState.Loading -> {
+                CircularProgressIndicator()
+            }
+
+            is AuthResultState.Success -> {
+                LaunchedEffect(Unit) {
+                    navController.navigate("login") {
+                        popUpTo("register") { inclusive = true }
+                    }
+                }
+            }
+
+            is AuthResultState.Error -> {
+                Text(
+                    text = (authState as AuthResultState.Error).message,
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+
+            else -> {}
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        TextButton(onClick = { navController.popBackStack() }) {
+            Text("Already have an account? Login")
         }
     }
 }

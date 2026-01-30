@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                 AppNav()
 
             }
+//            Text("APP STARTED")
         }
     }
 }
