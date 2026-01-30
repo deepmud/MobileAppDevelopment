@@ -4,9 +4,9 @@ package uk.ac.tees.mad.E4621366.mobileappdevelopment.model
 data class RegisterRequest(
     val email: String,
     val password: String,
-    val gender: String,
-//    val firstname: String,
-//    val middlename: String,
+//    val gender: String,
+    val firstname: String,
+    val middlename: String,
 //    val lastname: String,
 //    val dateOfBirth: String,
 //    val streetAddress: String,
