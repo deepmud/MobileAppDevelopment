@@ -53,7 +53,7 @@ fun LazyListScope.dashboardMenuGrid(
             onClick = (item.action ?: { item.route?.let { navController.navigate(it) } }) as (() -> Unit)?
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+       Spacer(modifier = Modifier.height(12.dp))
     }
 }
 

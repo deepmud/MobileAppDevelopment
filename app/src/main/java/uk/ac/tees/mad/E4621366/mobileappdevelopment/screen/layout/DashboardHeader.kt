@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,8 +31,8 @@ fun DashboardHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-           .height(80.dp) // fixed header height
-            .background(Color(0xFF1976D2))
+           .height(100.dp) // fixed header height
+            .background(Color(0xff1e3c65))
             .statusBarsPadding()
             .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -42,7 +43,7 @@ fun DashboardHeader(
             text = appName,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = Color.White,fontStyle = FontStyle.Italic
 
         )
 

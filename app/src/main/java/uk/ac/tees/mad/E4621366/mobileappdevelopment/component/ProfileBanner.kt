@@ -47,7 +47,7 @@ fun ProfileBanner(imagePath: String?,
             modifier = Modifier
                 .size(140.dp)
                 .clip(CircleShape)
-                .border(4.dp, Color(0xFF1976D2), CircleShape),
+                .border(4.dp, Color( 0xffffffff), CircleShape),
             contentScale = ContentScale.Crop
         )
 
@@ -62,6 +62,6 @@ fun ProfileBanner(imagePath: String?,
     Text(
         text = if(userName != null) userName else "Unknown",
         fontSize = 16.sp,
-        color = Color.Black
+        color = Color( 0xff1e3c65)
     )}
 }

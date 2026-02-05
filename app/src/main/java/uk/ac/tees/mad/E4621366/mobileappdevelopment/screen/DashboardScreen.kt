@@ -49,11 +49,15 @@ import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.LocationViewModel
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.PhotoViewModel
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.PhotoViewModelFactory
 import android.provider.Settings
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -200,13 +204,15 @@ fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewMo
     ) {
 
         Scaffold(
+            contentWindowInsets = WindowInsets(0),
+            containerColor = Color(0xFFE8EAE5),
             bottomBar = {
                 DashboardFooter(locationText)
             }
         ) { padding ->
 
             LazyColumn(
-                modifier = Modifier.padding(padding),
+                modifier = Modifier.padding(padding).background(color = Color( 0xffe8eae5)),
             ) {
 
                 stickyHeader {
@@ -240,7 +246,10 @@ fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewMo
                     )
                 }
 
-                item { Spacer(Modifier.height(20.dp)) }
+                item { Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(20.dp)
+                    .background(Color(0xFFE8EAE5))) }
 
 
             }
