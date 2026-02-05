@@ -2,7 +2,7 @@ package uk.ac.tees.mad.E4621366.mobileappdevelopment
 
 import android.app.Application
 import androidx.room.Room
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.AppDatabase
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.AppDatabase
 
 
 class MyApp : Application() {

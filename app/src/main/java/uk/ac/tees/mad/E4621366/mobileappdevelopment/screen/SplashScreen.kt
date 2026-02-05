@@ -19,7 +19,7 @@ fun SplashScreen(navController: NavController) {
     val authVM: AuthViewModel = viewModel()
 
     LaunchedEffect(Unit) {
-        delay(1500)
+        delay(100)
 
         if (authVM.isLoggedIn()) {
             navController.navigate("dashboard") {
@@ -36,6 +36,6 @@ fun SplashScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text("Emmatech Health Record...", fontSize = 24.sp)
+        Text("Emtech Health Record...", fontSize = 24.sp)
     }
 }

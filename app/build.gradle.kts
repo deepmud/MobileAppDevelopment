@@ -47,8 +47,19 @@ android {
 }
 
 dependencies {
+
+
+
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compiler)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.foundation)
     val roomVersion = "2.7.1"
 
+    configurations.all {
+        exclude(group = "com.google.guava", module = "listenablefuture")
+    }
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -62,9 +73,13 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.play.services.location)
+
+
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.ktx)
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,5 +108,14 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+// Gson converter for JSON parsing
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+// Optional: Coroutine support
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.compose.foundation:foundation:1.6.0")
 
 }

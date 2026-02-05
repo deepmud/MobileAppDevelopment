@@ -16,6 +16,11 @@ playServicesLocation = "21.3.0"
 uiGraphics = "1.10.1"
 roomCommonJvm = "2.8.4"
 roomKtx = "2.8.4"
+ui = "1.10.1"
+foundationLayout = "1.10.1"
+compiler = "3.2.0-alpha11"
+runtime = "1.10.2"
+foundationVersion = "1.10.2"
 
 
 [libraries]
@@ -40,6 +45,11 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
 androidx-room-common-jvm = { group = "androidx.room", name = "room-common-jvm", version.ref = "roomCommonJvm" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "ui" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
+androidx-compiler = { group = "androidx.databinding", name = "compiler", version.ref = "compiler" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
+androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundationVersion" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
