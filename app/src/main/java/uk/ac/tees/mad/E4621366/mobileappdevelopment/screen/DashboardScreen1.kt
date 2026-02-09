@@ -1,6 +1,5 @@
 package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
 import android.widget.Toast
@@ -17,7 +16,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,11 +31,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.delay
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.MyApp
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.getAddressFromLocation
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.common.getAddressFromLocation
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.layout.DashboardFooter
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.layout.DashboardHeader
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.util.rememberGoogleSignIn
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthViewModel
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.IndicatorViewModel
@@ -130,47 +126,47 @@ fun DashboardScreen1(navController: NavController, authVM: AuthViewModel = viewM
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+//
+//    LaunchedEffect(Unit) {
+//        delay(500)
+//
+//        permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+//        indicatorVM.loadIndicators(
+//            indicator = "HEPATITIS_B",
+//            country = "NG",
+//            year = 2023
+//        )
+//    }
 
-    LaunchedEffect(Unit) {
-        delay(500)
-
-        permissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        indicatorVM.loadIndicators(
-            indicator = "HEPATITIS_B",
-            country = "NG",
-            year = 2023
-        )
-    }
-
-    when {
-        loading -> Text("Loading…")
-        error != null -> Text("Error: $error")
-        else -> LazyColumn {
-            items(data) { item ->
-                Text("${item.name}: ${item.value}")
-            }
-        }
-    }
+//    when {
+//        loading -> Text("Loading…")
+//        error != null -> Text("Error: $error")
+//        else -> LazyColumn {
+//            items(data) { item ->
+//                Text("${item.name}: ${item.value}")
+//            }
+//        }
+//    }
 
 
-    DashboardHeader(
-        appName = "EmtechEHR",
+//    DashboardHeader(
+//        appName = "EmtechEHR",
 //        userName = authVM?.getCurrentUserEmail()?.substringBefore("@")
 //            ?.take(8),
 //       profileImage = photos?.firstOrNull()?.imagePath,
 //        cameraPermission = {
 //            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
 //        },
-        onLogout = {
-                authVM.logout()
-                // Sign out from Google client to force account picker
-                googleSignIn.client.signOut()
-                navController.navigate("login") {
-                    popUpTo("dashboard") { inclusive = true }
-                }
-
-        }
-    )
+//        onLogout = {
+//                authVM.logout()
+//                // Sign out from Google client to force account picker
+//                googleSignIn.client.signOut()
+//                navController.navigate("login") {
+//                    popUpTo("dashboard") { inclusive = true }
+//                }
+//
+//        }
+//    )
 
     LazyColumn(
         modifier = Modifier

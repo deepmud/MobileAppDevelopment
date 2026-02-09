@@ -1,8 +1,5 @@
 package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.auth
 
-import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -10,12 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.R
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthViewModel
-import androidx.compose.ui.res.stringResource
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.util.rememberGoogleSignIn
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthResultState
 

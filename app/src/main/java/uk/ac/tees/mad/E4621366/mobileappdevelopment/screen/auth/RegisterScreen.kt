@@ -18,7 +18,7 @@ import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthViewModel
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    authVM: AuthViewModel = viewModel()
+    authVM: AuthViewModel
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }

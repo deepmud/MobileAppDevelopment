@@ -4,21 +4,17 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.location.Location
 import android.location.LocationManager
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,7 +35,7 @@ import uk.ac.tees.mad.E4621366.mobileappdevelopment.MyApp
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.component.dashboardMenuGrid
 
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.component.ProfileBanner
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.getAddressFromLocation
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.common.getAddressFromLocation
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.layout.DashboardFooter
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.layout.DashboardHeader
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.util.rememberGoogleSignIn
@@ -52,19 +48,16 @@ import android.provider.Settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.model.DashboardMenuItem
+import com.google.android.gms.location.Priority
 
 @Composable
-fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewModel(), indicatorVM: IndicatorViewModel = viewModel()) {
+fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewModel()) {
 
     val context = LocalContext.current
 
@@ -76,9 +69,7 @@ fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewMo
     val app = LocalContext.current.applicationContext as MyApp
     val photoDao = app.database.photoDao()
     val vm = null
-    val data by indicatorVM.state.collectAsState()
-    val loading by indicatorVM.loading.collectAsState()
-    val error by indicatorVM.error.collectAsState()
+
     val locationVM: LocationViewModel = viewModel()
     val location by locationVM.location.collectAsState()
     val locationStatus by locationVM.status.collectAsState()
@@ -161,17 +152,32 @@ fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewMo
                 return@rememberLauncherForActivityResult
             }
 
-            @SuppressLint("MissingPermission")
-            fusedClient.getCurrentLocation(
-                com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY,
-                null
-            ).addOnSuccessListener { loc ->
+//            @SuppressLint("MissingPermission")
+//            fusedClient.getCurrentLocation(
+//                com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY,
+//                null
+//            ).addOnSuccessListener { loc ->
+//
+//                if (loc != null) {
+//                    locationVM.setLocation(loc)
+//                } else {
+//                    Toast.makeText(context, "Fetching location… move outdoors", Toast.LENGTH_LONG)
+//                        .show()
+//                }
+//            }
 
+            @SuppressLint("MissingPermission")
+            fusedClient.lastLocation.addOnSuccessListener { loc ->
                 if (loc != null) {
                     locationVM.setLocation(loc)
                 } else {
-                    Toast.makeText(context, "Fetching location… move outdoors", Toast.LENGTH_LONG)
-                        .show()
+                    // fallback only if null
+                    fusedClient.getCurrentLocation(
+                        Priority.PRIORITY_HIGH_ACCURACY,
+                        null
+                    ).addOnSuccessListener { fresh ->
+                        fresh?.let { locationVM.setLocation(it) }
+                    }
                 }
             }
         }
@@ -196,6 +202,8 @@ fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewMo
 
     }
     LaunchedEffect(Unit) {
+        delay(500)
+
         locationVM.refresh(context)
     }
 
@@ -234,7 +242,6 @@ fun DashboardScreen(navController: NavController, authVM: AuthViewModel = viewMo
                         photos.firstOrNull()?.imagePath,
                         userName = authVM.getCurrentUserEmail()
                     )
-//                           ?.substringBefore("@"))
                 }
 
 

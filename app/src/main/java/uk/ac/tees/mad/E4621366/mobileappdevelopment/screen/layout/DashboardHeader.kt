@@ -43,7 +43,8 @@ fun DashboardHeader(
             text = appName,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
-                    color = Color.White,fontStyle = FontStyle.Italic
+                    color = Color.White,
+//            fontStyle = FontStyle.Italic
 
         )
 
@@ -66,6 +67,7 @@ fun DashboardHeader(
                 text = "Logout",
                 fontSize = 16.sp,
                 color = Color.White
+
             )
         }
 

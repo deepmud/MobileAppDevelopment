@@ -21,6 +21,8 @@ foundationLayout = "1.10.1"
 compiler = "3.2.0-alpha11"
 runtime = "1.10.2"
 foundationVersion = "1.10.2"
+foundationLayoutVersion = "1.10.2"
+material3 = "1.4.0"
 
 
 [libraries]
@@ -50,6 +52,8 @@ androidx-compose-foundation-layout = { group = "androidx.compose.foundation", na
 androidx-compiler = { group = "androidx.databinding", name = "compiler", version.ref = "compiler" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 androidx-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundationVersion" }
+androidx-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayoutVersion" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
