@@ -24,16 +24,20 @@ class AuthViewModel : ViewModel() {
         password: String
     ) {
         _authState.value = AuthResultState.Loading
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    _authState.value = AuthResultState.Success
-                } else {
-                    _authState.value =
-                        AuthResultState.Error(task.exception?.message ?: "Registration failed")
+        if (email.isBlank() || password.isBlank()) {
+            _authState.value =
+                AuthResultState.Error("Please enter Email and password")
+        }else {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        _authState.value = AuthResultState.Success
+                    } else {
+                        _authState.value =
+                            AuthResultState.Error(task.exception?.message ?: "Registration failed")
+                    }
                 }
-            }
+        }
     }
 
     // -------------------------------
@@ -44,7 +48,10 @@ class AuthViewModel : ViewModel() {
         password: String,onResult: (Boolean, String?) -> Unit
     ) {
         _authState.value = AuthResultState.Loading
-
+        if (email.isBlank() || password.isBlank()) {
+            _authState.value =
+                uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthResultState.Error("Please enter Email and password")
+        }else {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -56,6 +63,7 @@ class AuthViewModel : ViewModel() {
                     onResult(false, null)
                 }
             }
+        }
     }
 
     // -------------------------------

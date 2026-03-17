@@ -29,6 +29,7 @@ import android.util.Log
 import com.google.android.gms.common.api.ApiException
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.R
 import androidx.compose.ui.res.stringResource
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.IndicatorViewModel
 
 
 @Composable
@@ -39,7 +40,11 @@ fun AppNav() {
         composable("splash") { SplashScreen(navController) }
         composable("login") { val authVM: AuthViewModel = viewModel();LoginScreen(navController,authVM) }
         composable("register") { val authVM: AuthViewModel = viewModel();RegisterScreen(navController,authVM) }
-        composable("dashboard") {  val authVM: AuthViewModel = viewModel();DashboardScreen(navController,authVM) }
+        composable("dashboard") {  val authVM: AuthViewModel = viewModel();val IndicatorVM: IndicatorViewModel = viewModel();DashboardScreen(navController,authVM,IndicatorVM) }
+//        composable("indicator_page") {
+//            IndicatorScreen(navController, indicatorVM)
+//        }
+
     }
 }
 

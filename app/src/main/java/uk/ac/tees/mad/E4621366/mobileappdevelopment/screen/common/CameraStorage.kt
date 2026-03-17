@@ -1,6 +1,5 @@
-package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen
+package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common
 
-import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import androidx.room.Database
