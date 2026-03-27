@@ -1,22 +1,25 @@
 package uk.ac.tees.mad.E4621366.mobileappdevelopment.util
 
-import android.util.Log
+import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.R
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.viewmodel.AuthViewModel
 
 data class GoogleSignInResult(
-    val launcher: androidx.activity.result.ActivityResultLauncher<android.content.Intent>,
-    val client: com.google.android.gms.auth.api.signin.GoogleSignInClient
+    val launcher: ActivityResultLauncher<Intent>,
+    val client: GoogleSignInClient
 )
 
 @Composable
@@ -26,7 +29,7 @@ fun rememberGoogleSignIn(
     errorState: MutableState<String?> // pass error holder from screen
 ): GoogleSignInResult {
     val context = LocalContext.current
-    val webClientId = androidx.compose.ui.res.stringResource(R.string.default_web_client_id)
+    val webClientId = stringResource(R.string.default_web_client_id)
 
     // Google Sign-In client
     val googleSignInClient = remember {

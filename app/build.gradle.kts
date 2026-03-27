@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.androidx.compiler)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.foundation)
+    implementation(libs.androidx.foundation.layout)
+    implementation(libs.androidx.material3)
     val roomVersion = "2.7.1"
 
     configurations.all {
@@ -73,7 +75,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.play.services.location)
-
+    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material:material:1.5.0")
 
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.room.common.jvm)

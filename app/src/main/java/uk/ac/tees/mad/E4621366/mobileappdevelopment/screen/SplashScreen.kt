@@ -1,13 +1,18 @@
 package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 //import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -19,7 +24,7 @@ fun SplashScreen(navController: NavController) {
     val authVM: AuthViewModel = viewModel()
 
     LaunchedEffect(Unit) {
-        delay(100)
+        delay(1500)
 
         if (authVM.isLoggedIn()) {
             navController.navigate("dashboard") {
@@ -33,9 +38,9 @@ fun SplashScreen(navController: NavController) {
     }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color = Color( 0xffe8eae5)).padding( start = 15.dp , end = 10.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text("Emtech Health Record...", fontSize = 24.sp)
+        Text("Emtech W.H.O. Global Health Observatory Hepatitis Record", fontSize = 24.sp, color = Color(0xff1e3c65),fontStyle = FontStyle.Italic )
     }
 }

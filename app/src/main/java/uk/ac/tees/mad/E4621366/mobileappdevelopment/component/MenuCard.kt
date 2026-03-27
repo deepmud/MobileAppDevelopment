@@ -36,7 +36,7 @@ fun MenuCard(
             .height(100.dp)            // fixed height for consistent cards
             .clickable { onClick?.invoke() ?: item.route?.let { navController.navigate(it) } },
         shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE3F2FD))
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFffffff))
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -46,7 +46,7 @@ fun MenuCard(
             Icon(
                 imageVector = item.icon,
                 contentDescription = item.title,
-                tint = Color(0xFF1976D2),
+                tint = Color(0xff1e3c65),
                 modifier = Modifier.size(40.dp)
             )
 
@@ -55,7 +55,7 @@ fun MenuCard(
             Text(
                 text = item.title,
                 fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF0D47A1)
+                color = Color(0xff1e3c65)
             )
         }
     }

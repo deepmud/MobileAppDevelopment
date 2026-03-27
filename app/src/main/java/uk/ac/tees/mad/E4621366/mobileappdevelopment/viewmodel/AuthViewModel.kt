@@ -16,9 +16,7 @@ class AuthViewModel : ViewModel() {
     private val _authState = MutableStateFlow<AuthResultState>(AuthResultState.Idle)
     val authState: StateFlow<AuthResultState> = _authState
 
-    // -------------------------------
     // EMAIL + PASSWORD REGISTER
-    // -------------------------------
     fun registerWithEmail(
         email: String,
         password: String
@@ -40,9 +38,7 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    // -------------------------------
     // EMAIL + PASSWORD LOGIN
-    // -------------------------------
     fun loginWithEmail(
         email: String,
         password: String,onResult: (Boolean, String?) -> Unit
@@ -66,9 +62,7 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    // -------------------------------
     // GOOGLE LOGIN
-    // -------------------------------
     fun loginWithGoogle(idToken: String,onResult: (Boolean, String?) -> Unit) {
         _authState.value = AuthResultState.Loading
 
@@ -76,9 +70,7 @@ class AuthViewModel : ViewModel() {
         signInWithCredential(credential,onResult)
     }
 
-    // -------------------------------
     // FACEBOOK LOGIN
-    // -------------------------------
 //    fun loginWithFacebook(accessToken: String) {
 //        _authState.value = AuthResultState.Loading
 //
@@ -86,10 +78,9 @@ class AuthViewModel : ViewModel() {
 //        signInWithCredential(credential)
 //    }
 
-    // -------------------------------
-    // SHARED CREDENTIAL HANDLER
-    // -------------------------------
 
+
+    // SHARED CREDENTIAL HANDLER
     private fun signInWithCredential(
         credential: AuthCredential,
         onResult: (Boolean, String?) -> Unit
@@ -106,9 +97,8 @@ class AuthViewModel : ViewModel() {
                 }
             }
     }
-    // -------------------------------
+
     // SESSION CHECK (PERSISTENCE)
-    // -------------------------------
     fun isLoggedIn(): Boolean {
         return auth.currentUser != null
     }
@@ -121,18 +111,14 @@ class AuthViewModel : ViewModel() {
         return auth.currentUser?.email
     }
 
-    // -------------------------------
     // LOGOUT
-    // -------------------------------
     fun logout() {
         auth.signOut()
         _authState.value = AuthResultState.Idle
     }
 }
 
-// -------------------------------
 // AUTH STATE MODEL
-// -------------------------------
 sealed class AuthResultState {
     object Idle : AuthResultState()
     object Loading : AuthResultState()

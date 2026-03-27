@@ -9,9 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.PhotoDao
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.PhotoEntity
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.saveBitmapToInternalStorage
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.common.PhotoDao
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.common.PhotoEntity
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.common.saveBitmapToInternalStorage
 import kotlin.collections.emptyList
 
 
@@ -30,51 +30,9 @@ class PhotoViewModel(
     fun savePhoto(context: Context, bitmap: Bitmap) {
         viewModelScope.launch(Dispatchers.IO) {
             val path = saveBitmapToInternalStorage(context, bitmap)
+            dao.clearPhoto();
             dao.insert(PhotoEntity(imagePath = path))
         }
     }
 }
 
-
-class PhotoViewModelFactory(
-    private val dao: PhotoDao
-) : ViewModelProvider.Factory {
-
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PhotoViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PhotoViewModel(dao) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
-
-
-
-//
-//@Composable
-//fun TableHeader() {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .background(Color(0xFFE0E0E0))
-//            .padding(8.dp)
-//    ) {
-//        Text("Record", modifier = Modifier.weight(1f), fontWeight = FontWeight.Bold)
-//        Text("Status", modifier = Modifier.weight(1f), fontWeight = FontWeight.Bold)
-//    }
-//}
-//
-//@Composable
-//fun TableRow(record: String) {
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(vertical = 8.dp)
-//    ) {
-//        Text(record, modifier = Modifier.weight(1f))
-//        Text("Active", modifier = Modifier.weight(1f))
-//    }
-//
-//    Divider()
-//}

@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Search
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +54,7 @@ fun LazyListScope.dashboardMenuGrid(
             onClick = (item.action ?: { item.route?.let { navController.navigate(it) } }) as (() -> Unit)?
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
+       Spacer(modifier = Modifier.height(12.dp))
     }
 }
 

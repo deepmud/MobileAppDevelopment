@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common
+package uk.ac.tees.mad.E4621366.mobileappdevelopment.common
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -26,15 +26,9 @@ interface PhotoDao {
 
     @Query("SELECT * FROM photos ORDER BY createdAt DESC")
     fun getAllPhotos(): Flow<List<PhotoEntity>>
-}
 
-
-@Database(
-    entities = [PhotoEntity::class],
-    version = 1
-)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun photoDao(): PhotoDao
+    @Query("DELETE FROM photos WHERE 1")
+    suspend fun clearPhoto()
 }
 
 

@@ -21,7 +21,8 @@ fun DashboardFooter(location:  String?) {
     Box(
         Modifier.fillMaxWidth()
             .height(100.dp) // fixed header height
-            .background(Color(0xFF1976D2)) .
+//            .background(Color(0xFF1976D2)) .
+            .background(Color(0xff1e3c65)) .
             navigationBarsPadding()
             .padding(vertical  = 12.dp),
         contentAlignment = Alignment.Center
@@ -29,28 +30,8 @@ fun DashboardFooter(location:  String?) {
         Text(
             text = "Location: $location",
             fontSize = 14.sp,
-            color = Color.White
+            color = Color(0xffffffff)
         )
     }
-
+//    0xff1e3c65
 }
-
-
-
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .background(Color(0xFF1976D2))
-//            .navigationBarsPadding()
-//
-//            .padding(vertical = 12.dp),
-//        horizontalArrangement = Arrangement.SpaceBetween,
-//        verticalAlignment = Alignment.CenterVertically
-//    ) {
-//
-//        Text(
-//            text = "Location: $location",
-//            fontSize = 14.sp,
-//            color = Color.White
-//        )
-//    }

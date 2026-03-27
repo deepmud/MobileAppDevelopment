@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common
+package uk.ac.tees.mad.E4621366.mobileappdevelopment.common
 import android.location.Geocoder
 import android.location.Location
 import java.util.Locale

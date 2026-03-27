@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.navigation.AppNav
 import uk.ac.tees.mad.E4621366.mobileappdevelopment.ui.theme.MobileAppDevelopmentTheme
+import androidx.core.graphics.toColorInt
 
 class MainActivity : ComponentActivity() {
    // window.statusBarColor = android.graphics.Color.BLACK
@@ -23,7 +24,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.dark(
                 scrim = Color.BLACK
-            )
+            ),
+                    navigationBarStyle = SystemBarStyle.light(
+                    scrim = "#1e3c65".toColorInt(), // ✅ bar below your footer
+            darkScrim = "#1e3c65".toColorInt()
+        )
         )
         setContent {
             MobileAppDevelopmentTheme {

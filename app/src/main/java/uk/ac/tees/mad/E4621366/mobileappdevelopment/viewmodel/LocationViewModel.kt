@@ -12,7 +12,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.ac.tees.mad.E4621366.mobileappdevelopment.screen.common.LocationHelper
+import uk.ac.tees.mad.E4621366.mobileappdevelopment.common.LocationHelper
 
 
 class LocationViewModel(app: Application) : AndroidViewModel(app) {
@@ -57,14 +57,19 @@ class LocationViewModel(app: Application) : AndroidViewModel(app) {
         val fused = LocationServices.getFusedLocationProviderClient(context)
 
         @SuppressLint("MissingPermission")
-        fused.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+        fused.lastLocation.addOnSuccessListener { last ->
+            if (last != null) {
+                setLocation(last)
+            }
+//        fused.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+        fused.getCurrentLocation(Priority.PRIORITY_BALANCED_POWER_ACCURACY, null)
             .addOnSuccessListener { loc ->
-                _location.value = loc
+                _location.value = if (loc != null && last != loc) loc else last
                 _status.value = if (loc == null) "UNKNOWN" else "OK"
             }
             .addOnFailureListener {
                 _status.value = "UNKNOWN"
             }
+        }
     }
 }
-
